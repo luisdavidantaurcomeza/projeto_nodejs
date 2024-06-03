@@ -69,3 +69,6 @@ server.listen({
 });
 
 //CRUD - CREATE, READ, UPDATE, DELETE, PATCH
+
+
+// parei às 17:32 - 46:24
