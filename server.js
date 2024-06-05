@@ -13,21 +13,23 @@ server.listen(3333); */
 //Delete localhost:3333/videos/1
 
 import { fastify } from "fastify";
-import { DatabaseMemory } from "./database-memory.js";
+import conexao from './conexao.cjs';
 import { title } from "node:process";
 
 const server = fastify();
-const database = new DatabaseMemory();
+//const database = new DatabaseMemory();
+const database = new conexao();
+
 
 //route parameter - parametro na rota - id
 //post para criar
-server.post('/videos', (request, reply) => {
+server.post('/videos', async (request, reply) => {
    const{title, description, duration} = request.body;
      
     /* const body = request.body;
     console.log(body); */
 
-    database.create({
+    await database.create({
         title,
         description,
         duration,
@@ -38,8 +40,10 @@ server.post('/videos', (request, reply) => {
 });
 
 
-server.get('/videos', (request, reply) => {
-    const videos = database.list();
+server.get('/videos', async (request, reply) => {
+    const search = request.query.search;
+    
+    const videos = await database.list(search);
 
     return videos;
 });
@@ -60,9 +64,12 @@ server.put('/videos/:id', (request, reply) => {
    return reply.status(204).send;
 });
 
-server.delete('/videos/:id', () => {
-    return 'Hello world';
-});
+server.delete('/videos/:id', (request, reply) => {
+    const videoId = request.params.id;
+    database.delete(videoId)
+
+    return reply.status(204).send;
+ });
 
 server.listen({
     port:3333,
