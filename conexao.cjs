@@ -1,4 +1,4 @@
-import 'dotenv/config';
+/* import 'dotenv/config';
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 
 
   module.exports = connection;
-
+ */
 /*   O erro que você está vendo ocorre porque o seu arquivo conexao.js está sendo tratado como um módulo ES (ECMAScript) em vez de um módulo CommonJS. Isso acontece porque o Node.js interpreta arquivos com a extensão .js como módulos ES quando o arquivo package.json contém a chave "type": "module".
 
 Para resolver esse problema, você pode fazer uma das seguintes opções:
