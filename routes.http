@@ -1,33 +1,32 @@
 //falar qual é o formato dos dados para o json
-
+//arquivo routes.http
 
 POST http://localhost:3333/videos
 Content-Type: application/json
 
 {
-    "title":"video config",
-    "description": "esse é o primeiro video",
-    "duration": 180
+    "title":"video 5",
+    "description": "esse é o quinto video",
+    "duration": 170
 
 }
 
 ###
 
-GET http://localhost:3333/videos?search
+GET http://localhost:3333/videos
 
 ###
 
 
-PUT http://localhost:3333/videos/930eb5b3-7db4-4c9e-b7fb-33b7611817ec
+PUT http://localhost:3333/videos/dbc7cce6-1c75-4b26-b127-9f2b8532821b
 Content-Type: application/json
 
 {
-    "title":"video 02",
-    "description": "esse é o primeiro video",
-    "duration": 180
-
+    "title": "video 5",
+    "description": "esse é o quinto video",
+    "duration": 170
 }
 
 ###
 
-DELETE http://localhost:3333/videos/adeb3997-1e22-4800-ab8e-4602fe8841fe
+DELETE http://localhost:3333/videos/dbc7cce6-1c75-4b26-b127-9f2b8532821b

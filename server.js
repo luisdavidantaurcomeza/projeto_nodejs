@@ -11,14 +11,13 @@ server.listen(3333); */
 
 //post localhost:3333/videos
 //Delete localhost:3333/videos/1
-
+//arquivo server.js
 import { fastify } from "fastify";
-import conexao from './conexao.cjs';
-import { title } from "node:process";
+import { DatabasePostgres } from "./database-postgres.js";
 
 const server = fastify();
 //const database = new DatabaseMemory();
-const database = new conexao();
+const database = new DatabasePostgres();
 
 
 //route parameter - parametro na rota - id
@@ -35,12 +34,11 @@ server.post('/videos', async (request, reply) => {
         duration,
     });
 
-    console.log(database.list());
     return reply.status(201).send();
 });
 
 
-server.get('/videos', async (request, reply) => {
+server.get('/videos', async (request) => {
     const search = request.query.search;
     
     const videos = await database.list(search);
@@ -49,12 +47,12 @@ server.get('/videos', async (request, reply) => {
 });
 
 //atualizar um video:
-server.put('/videos/:id', (request, reply) => {
+server.put('/videos/:id', async (request, reply) => {
    const videoId = request.params.id;
    const{title, description, duration} = request.body;
 
 
-  database.update(videoId,{
+  await database.update(videoId,{
     title,
     description,
     duration,
@@ -64,9 +62,9 @@ server.put('/videos/:id', (request, reply) => {
    return reply.status(204).send;
 });
 
-server.delete('/videos/:id', (request, reply) => {
+server.delete('/videos/:id', async (request, reply) => {
     const videoId = request.params.id;
-    database.delete(videoId)
+    await database.delete(videoId)
 
     return reply.status(204).send;
  });
@@ -75,7 +73,3 @@ server.listen({
     port:3333,
 });
 
-//CRUD - CREATE, READ, UPDATE, DELETE, PATCH
-
-
-// parei às 17:32 - 46:24
