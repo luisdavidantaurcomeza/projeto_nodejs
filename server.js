@@ -15,6 +15,9 @@ server.listen(3333); */
 import { fastify } from "fastify";
 import { DatabasePostgres } from "./database-postgres.js";
 
+const port = process.env.PORT || 4000;
+
+
 const server = fastify();
 //const database = new DatabaseMemory();
 const database = new DatabasePostgres();
