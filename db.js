@@ -1,6 +1,4 @@
 // app.js
-import 'dotenv/config'
-
 const postgres = require('postgres');
 require('dotenv').config();
 
@@ -24,4 +22,3 @@ async function getPgVersion() {
 }
 
 getPgVersion();
-
